@@ -9,5 +9,6 @@ int main(void)
     //std::cin >> name; // lee hbasta el primer espacio
     std::getline(std::cin, name);
     std::cout << "Hello, " + name + "\n" ;
+
     return 0;
 }
