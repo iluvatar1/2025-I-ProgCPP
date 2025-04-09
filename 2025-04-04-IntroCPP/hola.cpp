@@ -10,5 +10,7 @@ int main(void)
     std::getline(std::cin, name);
     std::cout << "Hello, " + name + "\n" ;
 
+    std::cout << 3 << "\n";
+    
     return 0;
 }
