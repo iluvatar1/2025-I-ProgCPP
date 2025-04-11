@@ -10,24 +10,26 @@ Informar si lo adivino o no
 #include <iostream>
 
 // declaration
-void play(int success);
+void play(int success, int min_val, int max_val);
 
 
 int main(void) {
-    play(10);
-    play(20);
+    play(10, 1, 100);
+    play(20, 2, 22);
 
     return 0;
 }
 
 // Implementation
-void play(int success)
+void play(int success, int min_val, int max_val)
 {
     const int NUM = success;
     int guessed_number = NUM/2;
 
-    const int MIN = 1;
-    const int MAX = 100;
+    const int MIN = min_val;
+    const int MAX = max_val;
+
+    std::cout << "\nINICIA EL JUEGO\n";
 
     while(guessed_number != NUM) {
         std::cout << "Adivina un numero entre  " << MIN << "  y " << MAX << ":\n";
