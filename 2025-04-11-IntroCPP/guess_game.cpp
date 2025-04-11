@@ -9,8 +9,19 @@ Informar si lo adivino o no
 
 #include <iostream>
 
-int main(void) {
+// declaration
+void play(void);
 
+
+int main(void) {
+    play();
+
+    return 0;
+}
+
+// Implemetation
+void play(void)
+{
     const int NUM = 10;
     int guessed_number = NUM/2;
 
@@ -38,5 +49,4 @@ int main(void) {
         }
     }
 
-    return 0;
 }
