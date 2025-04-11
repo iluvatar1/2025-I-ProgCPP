@@ -10,19 +10,20 @@ Informar si lo adivino o no
 #include <iostream>
 
 // declaration
-void play(void);
+void play(int success);
 
 
 int main(void) {
-    play();
+    play(10);
+    play(20);
 
     return 0;
 }
 
-// Implemetation
-void play(void)
+// Implementation
+void play(int success)
 {
-    const int NUM = 10;
+    const int NUM = success;
     int guessed_number = NUM/2;
 
     const int MIN = 1;
