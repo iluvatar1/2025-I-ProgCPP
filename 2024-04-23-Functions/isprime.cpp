@@ -6,7 +6,13 @@ bool isprime(long n);
 void test(void);
 
 int main(void){
-    
+
+    for(int ii = 2; ii <= 150; ++ii) {
+        if (isprime(ii) == true) {
+            std::cout << ii << "\n";    
+        }
+    }
+
     return 0;
 }
 
