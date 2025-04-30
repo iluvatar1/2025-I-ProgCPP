@@ -1,7 +1,7 @@
 #include <iostream>
 #include "derivatives.h"
 
-//double f(double x);
+double f(double x);
 
 int main(int argc, char **argv) {
     std::cout.precision(15);
@@ -10,8 +10,8 @@ int main(int argc, char **argv) {
     double x = 1.2345;
     double h = 1.0e-19;
 
-    double forward_result = forward_diff(x, h);
-    double central_result = central_diff(x, h);
+    double forward_result = forward_diff(x, h, f);
+    double central_result = central_diff(x, h, f);
 
     std::cout << "Forward Difference: " << forward_result << std::endl;
     std::cout << "Central Difference: " << central_result << std::endl;
