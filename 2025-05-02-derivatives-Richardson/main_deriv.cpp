@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
                 << forward_result << " "
                 << central_result << " "
                 << error_forward << " "
-                << error_central 
+                << error_central << " "
                 << error_forward_r << " "
                 << std::endl;
     }
