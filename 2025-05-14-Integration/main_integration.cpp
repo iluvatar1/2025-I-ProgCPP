@@ -21,6 +21,8 @@ int main(void)
 
     std::cout << gauss2(-1.0, 1.0, f) << "\n";
 
+    std::cout << gauss3(-1.0, 1.0, f) << "\n";
+
     return 0;
 }
 
