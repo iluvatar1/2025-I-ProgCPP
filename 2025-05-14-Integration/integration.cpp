@@ -42,3 +42,18 @@ double richardson(double a, double b, int N, fptr f, algptr alg, int alpha)
     double val2 = alg(a, b, 2*N, f);
     return (aux*val2 - val1)/(aux - 1.0);
 }
+
+double gauss2(double a, double b, fptr fun)
+{
+    // define point coordinates
+    double x0 = -1.0/std::sqrt(3.0);
+    double x1 = +1.0/std::sqrt(3.0);
+    
+    //define weigths
+    double w0 = 1.0;
+    double w1 = 1.0;
+    
+    // compute integral
+    double result = w0*fun(x0) + w1*fun(x1);
+    return result;
+}
