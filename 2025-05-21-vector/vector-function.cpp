@@ -3,6 +3,7 @@
 #include <string>
 
 double average(const std::vector<double> & x);
+void fill(std::vector<double> & x);
 
 int main(int argc , char **argv)
 {
@@ -18,9 +19,7 @@ int main(int argc , char **argv)
 
     // initialize the data
     std::cout << "Iniciando datos ...\n";
-    for(int ii = 0; ii < N; ii++) {
-        data[ii] = ii;
-    }
+    fill(data);
 
     // compute the average
     std::cout << "Calculando promedio ...\n";
@@ -39,4 +38,11 @@ double average(const std::vector<double> & x)
         suma = suma + x[ii];
     }
     return suma/x.size();
+}
+
+void fill(std::vector<double> & x)
+{
+    for(int ii = 0; ii < x.size(); ii++) {
+        x[ii] = ii;
+    }
 }
