@@ -53,5 +53,33 @@ void matmul(const std::vector<double> & A, int mA, int nA,
       }
     }   
   }
+}
 
+bool check_inverse(const std::vector<double> & A,  
+                   const std::vector<double> & B, 
+                   int m, 
+                   double eps) {
+
+  // multiply matrices
+  std::vector<double> r;
+  matmul(A, m, m, B, m, m, r);
+
+  // matriz resta?
+  for (int ii = 0; ii < m; ii++){
+    for (int jj = 0; jj < m; jj++) {
+      int identidad = 0.0;
+      if (ii == jj) identidad = 1.0;
+      r[ii*m + jj] = r[ii*m + jj] - identidad;
+    }
+  }
+
+  // verify elements: early exit
+  for (int ii = 0; ii < m; ii++){
+    for (int jj = 0; jj < m; jj++) {
+      if (std::fabs(r[ii*m + jj]) > eps) {
+        return false;
+      } 
+    }
+  }
+  return true;
 }
