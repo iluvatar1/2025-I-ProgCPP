@@ -16,7 +16,14 @@ int main(int argc, char **argv)
     int N = 1;
     state_t y(N);
     initial_conditions(y);
-    integrate_euler(fderiv, y, 0.0, 10.0, 0.01, print);
+
+    // // lambda for derivatives
+    // auto fderiv = [R](const state_t & y, state_t & dydt, double t){
+    //     dydt[0] = R*y[0]*(1-y[0]);
+    // };
+
+    //integrate_euler(fderiv, y, 0.0, 10.0, 0.05, print);
+    integrate_heun(fderiv, y, 0.0, 10.0, 0.05, print);
     return 0;
 }
 
