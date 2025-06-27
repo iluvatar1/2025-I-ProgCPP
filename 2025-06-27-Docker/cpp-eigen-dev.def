@@ -1,0 +1,50 @@
+Bootstrap: docker
+From: ubuntu:24.04
+Stage: spython-base
+
+%post
+# Use Ubuntu 24.04 as base image
+
+# Avoid interactive prompts during installation
+DEBIAN_FRONTEND=noninteractive
+
+# Update package list and install dependencies
+apt update && apt install -y \
+build-essential \
+libeigen3-dev \
+cmake \
+pkg-config \
+&& rm -rf /var/lib/apt/lists/*
+
+# Updating gcc/g++
+apt-get update
+apt install software-properties-common -y
+apt install g++-14 -y
+
+# Installing starship: https://starship.rs/guide/
+apt install curl
+cd /tmp && curl -sS https://starship.rs/install.sh > install_starship.sh  &&  sh install_starship.sh --yes
+echo 'eval "$(starship init bash)"' >> ~/.bashrc
+
+# Exercise: Install git
+apt install git -y
+
+# Exercise: Install lazygit
+#RUN apt install lazygit
+
+# Exercise: Install uv for python management: https://docs.astral.sh/uv/#highlights
+
+
+# Set working directory
+mkdir -p /workspace
+cd /workspace
+
+# Default command
+%environment
+export DEBIAN_FRONTEND=noninteractive
+%runscript
+cd /workspace
+exec /bin/bash /bin/bash "$@"
+%startscript
+cd /workspace
+exec /bin/bash /bin/bash "$@"
