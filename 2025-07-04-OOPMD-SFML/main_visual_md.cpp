@@ -12,7 +12,7 @@
 void initial_conditions(std::vector<Particle> & particles);
 
 int main(int argc, char **argv) {
-  const int N = 2;
+  const int N = 4;
 
   std::vector<Particle> bodies;
   bodies.resize(N); // only one particle for now
@@ -21,8 +21,9 @@ int main(int argc, char **argv) {
   std::map<std::string, double> p;
   p["T0"] = 0.0;
   p["TF"] = 100.8767;
-  p["DT"] = 0.01;
+  p["DT"] = 0.001;
   p["G"] = 0.0; //-9.81;
+  p["K"] = 2000.543;
 
   // window
   const int WIDTH = 800, HEIGHT = 600;
@@ -35,7 +36,7 @@ int main(int argc, char **argv) {
   TimeIntegrator integrator(p["DT"]);
 
   // Boundary conditions
-  Boundary bc(2.345, 0.0, 0.0, 0.0, 0.5); // RMAX, CX, CY, CZ, EN
+  Boundary bc(2.345, 0.0, 0.0, 0.0, 1.0); // RMAX, CX, CY, CZ, EN
 
   // initial conditions and properties
   initial_conditions(bodies);
@@ -47,15 +48,19 @@ int main(int argc, char **argv) {
 
   // --- VISUALIZATION SETUP ---
   sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "C++ Simulation & Visualization");
-  window.setFramerateLimit(120);
+  window.setFramerateLimit(1200);
   sf::CircleShape particle_shape(bodies[0].rad);
   particle_shape.setFillColor(sf::Color::Cyan);
   particle_shape.setOrigin(0, 0);
   // color setup
   // create array for R, G, B
   std::vector<sf::Uint8> R(N, 0), G(N, 0), B(N, 0);
-  R[0] = 255;
-  B[1] = 255;
+  // random fill
+  std::mt19937 eng(1);
+  std::uniform_int_distribution<sf::Uint8> dist(0, 255);
+  for (int ip = 0; ip < N; ip++) R[ip] = dist(eng);
+  for (int ip = 0; ip < N; ip++) G[ip] = dist(eng);
+  for (int ip = 0; ip < N; ip++) B[ip] = dist(eng);
 
 
   // Time iteration
@@ -121,4 +126,15 @@ void initial_conditions(std::vector<Particle> & particles)
   particles[1].rad  = 0.203;
   particles[1].mass = 0.637;
 
+  particles[2].R[2] = -0.487;  // z is upwards, x to the right
+  particles[2].V[0] = -3.9876;//12.987; // z is upwards, x to the right
+  particles[2].V[2] = -2.1; //4.9876; //3.987; // z is upwards, x to the right
+  particles[2].rad  = 0.153;
+  particles[2].mass = 0.637;
+
+  particles[3].R[2] = 0.0;  // z is upwards, x to the right
+  particles[3].V[0] = -1.9876;//12.987; // z is upwards, x to the right
+  particles[3].V[2] = -2.1; //4.9876; //3.987; // z is upwards, x to the right
+  particles[3].rad  = 0.503;
+  particles[3].mass = 10.637;
 }
